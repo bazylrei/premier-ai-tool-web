@@ -10,7 +10,7 @@ import { ArticleService } from "../../services/article-service.service";
 export class HomeComponent {
   searchQuery: string = '';
   formattedKeywordSets: string[] = [];
-  articleData: any[] = []; // To store the article and validation data
+  articleData: any[] = [];
 
   constructor(private keywordService: KeywordService, private articleService: ArticleService) { }
 
@@ -34,7 +34,7 @@ export class HomeComponent {
     this.articleService.fetch(keyword).subscribe(
       response => {
         console.log(response);
-        this.articleData = response; // Store response directly for display
+        this.articleData = response;
       },
       error => {
         console.error('Search error:', error);
