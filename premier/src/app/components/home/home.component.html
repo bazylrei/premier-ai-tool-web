@@ -1,3 +1,47 @@
 <div class="search-container">
-    <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" (input)="onSearch()" />
+    <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" />
+    <button (click)="onSearch()">Search</button>
+    </div>
+    
+    <!-- Display formatted keyword sets -->
+    <table *ngIf="formattedKeywordSets.length > 0">
+        <thead>
+            <tr>
+                <th>Keywords</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let keywordSet of formattedKeywordSets">
+                <td>
+                    <a href="#" (click)="onKeywordClick(keywordSet)">{{ keywordSet }}</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Display article and validation data if available -->
+    <div *ngIf="articleData.length > 0" class="article-container">
+        <h3>Article and Validation Details</h3>
+        <div *ngFor="let item of articleData">
+            <h4>{{ item.article.title }} (ID: {{ item.article.id }})</h4>
+            <p><strong>Abstract:</strong> {{ item.article.abstract }}</p>
+    
+            <h5>Validation</h5>
+            <p><strong>Confidence Percentage:</strong> {{ item.validation.confidence_percentage }}%</p>
+    
+            <div>
+                <strong>Reasons for Relevance:</strong>
+                <ul>
+                    <li *ngFor="let reason of item.validation.reasons_for_relevance">{{ reason }}</li>
+                </ul>
+            </div>
+    
+            <div>
+                <strong>Reasons for Non-Relevance:</strong>
+                <ul>
+                    <li *ngFor="let reason of item.validation.reasons_for_non_relevance">{{ reason }}</li>
+                </ul>
+            </div>
+            <hr />
+        </div>
 </div>
